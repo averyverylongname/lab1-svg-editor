@@ -1,7 +1,7 @@
-import { Editor } from './application/Editor.js';
-import { SvgFileStore } from './io/SvgFileStore.js';
-import { CommandDispatcher } from './cli/CommandDispatcher.js';
-import { Repl } from './cli/Repl.js';
+import { Editor } from "./application/Editor.js";
+import { SvgFileStore } from "./io/SvgFileStore.js";
+import { CommandDispatcher } from "./cli/CommandDispatcher.js";
+import { Repl } from "./cli/Repl.js";
 
 const editor = new Editor(new SvgFileStore());
 const repl = new Repl(new CommandDispatcher(editor));

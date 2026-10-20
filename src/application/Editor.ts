@@ -1,7 +1,7 @@
-import { SvgDocument } from '../model/SvgDocument.js';
-import { SvgFileStore } from '../io/SvgFileStore.js';
-import { History } from './History.js';
-import type { EditCommand } from './commands/EditCommand.js';
+import { SvgDocument } from "../model/SvgDocument.js";
+import { SvgFileStore } from "../io/SvgFileStore.js";
+import { History } from "./History.js";
+import type { EditCommand } from "./commands/EditCommand.js";
 
 /** 应用入口只组织文档生命周期、文件操作和历史，不计算图形几何。 */
 export class Editor {
@@ -11,7 +11,8 @@ export class Editor {
   constructor(private readonly files = new SvgFileStore()) {}
 
   get document(): SvgDocument {
-    if (!this.current) throw new Error("no document. use 'init' or 'read' first");
+    if (!this.current)
+      throw new Error("no document. use 'init' or 'read' first");
     return this.current;
   }
 
@@ -28,13 +29,15 @@ export class Editor {
     this.current = document;
     this.filePath = path;
     this.history.barrier();
-    return [...warnings, `read ${path} (${document.count} elements)`].join('\n');
+    return [...warnings, `read ${path} (${document.count} elements)`].join(
+      "\n",
+    );
   }
 
   save(path?: string): string {
     const document = this.document;
     const target = path ?? this.filePath;
-    if (!target) throw new Error('no file path. use save <file.svg>');
+    if (!target) throw new Error("no file path. use save <file.svg>");
     this.files.write(target, document);
     this.filePath = target;
     this.history.barrier();

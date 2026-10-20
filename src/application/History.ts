@@ -1,5 +1,5 @@
-import type { SvgDocument } from '../model/SvgDocument.js';
-import type { EditCommand, EditResult } from './commands/EditCommand.js';
+import type { SvgDocument } from "../model/SvgDocument.js";
+import type { EditCommand, EditResult } from "./commands/EditCommand.js";
 
 export class History {
   private undoStack: EditCommand[] = [];
@@ -17,7 +17,7 @@ export class History {
   undo(): EditResult {
     this.checkAllowed();
     const command = this.undoStack.at(-1);
-    if (!command) throw new Error('nothing to undo');
+    if (!command) throw new Error("nothing to undo");
     const result = command.undo();
     this.undoStack.pop();
     this.redoStack.push(command);
@@ -27,7 +27,7 @@ export class History {
   redo(): EditResult {
     this.checkAllowed();
     const command = this.redoStack.at(-1);
-    if (!command) throw new Error('nothing to redo');
+    if (!command) throw new Error("nothing to redo");
     const result = command.redo();
     this.redoStack.pop();
     this.undoStack.push(command);
@@ -42,6 +42,6 @@ export class History {
   }
 
   private checkAllowed(): void {
-    if (this.blocked) throw new Error('undo not allowed after io command');
+    if (this.blocked) throw new Error("undo not allowed after io command");
   }
 }

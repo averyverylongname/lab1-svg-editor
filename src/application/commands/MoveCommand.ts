@@ -1,8 +1,14 @@
-import { EditCommand } from './EditCommand.js';
-import type { SvgDocument } from '../../model/SvgDocument.js';
+import { EditCommand } from "./EditCommand.js";
+import type { SvgDocument } from "../../model/SvgDocument.js";
 
 export class MoveCommand extends EditCommand {
-  constructor(private readonly id: string, private readonly dx: number, private readonly dy: number) { super(); }
+  constructor(
+    private readonly id: string,
+    private readonly dx: number,
+    private readonly dy: number,
+  ) {
+    super();
+  }
   protected apply(document: SvgDocument): string {
     const shape = document.find(this.id);
     shape.move(this.dx, this.dy);

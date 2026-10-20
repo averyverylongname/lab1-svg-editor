@@ -1,8 +1,14 @@
-import { EditCommand } from './EditCommand.js';
-import type { SvgDocument } from '../../model/SvgDocument.js';
+import { EditCommand } from "./EditCommand.js";
+import type { SvgDocument } from "../../model/SvgDocument.js";
 
 export class SetCommand extends EditCommand {
-  constructor(private readonly id: string, private readonly attribute: string, private readonly value: string) { super(); }
+  constructor(
+    private readonly id: string,
+    private readonly attribute: string,
+    private readonly value: string,
+  ) {
+    super();
+  }
   protected apply(document: SvgDocument): string {
     const shape = document.find(this.id);
     shape.setAttribute(this.attribute, this.value);
